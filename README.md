@@ -1,5 +1,5 @@
 # erin-dl
-**TL;DR** The result of this script (videos with subtiles) can be [downloaded here](https://mega.nz/#F!rAMXFSyQ!C6qoFmCm862BWGHhg27Y4A)!
+**TL;DR** The result of this script (videos with subtiles) can be [downloaded from Mega.nz](https://mega.nz/#F!rAMXFSyQ!C6qoFmCm862BWGHhg27Y4A)!
 
 Download videos with subtitles from https://www.erin.ne.jp in Japanese, English, Spanish, Portuguese, Chinese, Korean, French, Indonesian and Thai. Videos are left in their original (low resolution ;_;) mp4 format. The subtitles will be converted to SRT format.
 
