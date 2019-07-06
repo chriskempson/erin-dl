@@ -1,6 +1,8 @@
 # erin-dl
 Download videos with subtitles from https://www.erin.ne.jp in Japanese, English, Spanish, Portuguese, Chinese, Korean, French, Indonesian and Thai. Videos are left in their original (low bitrate ;_;) mp4 format. The subtitles will be converted to SRT format.
 
+![Erin in Voracious](screenshot.png)
+
 ## Why
 The video content at Erin has great potential as a source for beginner students of Japanese but is locked away, unloved, in an aging flash website. 
 
