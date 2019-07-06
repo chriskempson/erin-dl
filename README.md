@@ -1,4 +1,6 @@
 # erin-dl
+**TL;DR** Erin's videos with subtiles https://mega.nz/#F!rAMXFSyQ!C6qoFmCm862BWGHhg27Y4A
+
 Download videos with subtitles from https://www.erin.ne.jp in Japanese, English, Spanish, Portuguese, Chinese, Korean, French, Indonesian and Thai. Videos are left in their original (low resolution ;_;) mp4 format. The subtitles will be converted to SRT format.
 
 ![Erin in Voracious](screenshot.png)
