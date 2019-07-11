@@ -9,7 +9,7 @@
 #
 
 $input_file = $argv[1];
-$min_display_seconds = '3';
+$min_display_seconds = '4';
 
 if (strstr($input_file, '.en.')) $lang = 'eng'; // Why not 'en'?
 if (strstr($input_file, '.es.')) $lang = 'es';
@@ -21,7 +21,9 @@ if (strstr($input_file, '.id.')) $lang = 'id';
 if (strstr($input_file, '.th.')) $lang = 'eng'; // Yes they did...
 
 if (file_exists($input_file)) {
-    $xml = (array) simplexml_load_file($input_file);
+    $text = file_get_contents($input_file);
+    $text = str_replace('', '', $text); // Remove strange character in Basic Episode 15
+    $xml = (array) simplexml_load_string($text);
     $subtitles = (array) $xml['scene'];
 
     $i = 0;
@@ -44,23 +46,30 @@ if (file_exists($input_file)) {
             }
             
             $start_timestamp_seconds = (int) $start_time;
-            $start_timestamp_milliseconds = @explode('.', $start_time)[1] * 1000;
+            $start_timestamp_milliseconds = @explode('.', $start_time)[1] * 1000; 
+            $start_timestamp_milliseconds = substr($start_timestamp_milliseconds + 1000, 0, 3); // +1000 to prevent overlaps
+            $start_timestamp_milliseconds = str_pad($start_timestamp_milliseconds, 3, '0', STR_PAD_LEFT);
             
             $end_timestamp_seconds = (int) $end_time;
             $end_timestamp_milliseconds = @explode('.', $end_time)[1] * 1000;
+            $end_timestamp_milliseconds = substr($end_timestamp_milliseconds, 0, 3);
+            $end_timestamp_milliseconds = str_pad($end_timestamp_milliseconds, 3, '0', STR_PAD_LEFT);
             
             $next_start_timestamp_seconds = (int) $next_start_time;
             $next_start_timestamp_milliseconds = @explode('.', $next_start_time)[1] * 1000;
+            $next_start_timestamp_milliseconds = substr($next_start_timestamp_milliseconds, 0, 3);
+            $next_start_timestamp_milliseconds = str_pad($next_start_timestamp_milliseconds, 3, '0', STR_PAD_LEFT);
             
             $output .= $subtitle->attributes()->sid . "\n";
             
-            $output .= gmdate('H:i:s,', $start_timestamp_seconds) . substr($start_timestamp_milliseconds, 0, 3);
+            $output .= gmdate('H:i:s,', $start_timestamp_seconds) . $start_timestamp_milliseconds;
             $output .= ' --> ';
 
-            if ($end_time > $next_start_time) {
-                $output .= gmdate('H:i:s,', $next_start_timestamp_seconds) . substr($next_start_timestamp_milliseconds, 0, 3) . "\n";
+            // Check if $next_start_time != 0 otherwise last subtitle end date will be 00:00:00,000
+            if ($end_time > $next_start_time && $next_start_time != 0) {
+                $output .= gmdate('H:i:s,', $next_start_timestamp_seconds) . $next_start_timestamp_milliseconds . "\n";
             } else {
-                $output .= gmdate('H:i:s,', $end_timestamp_seconds) . substr($end_timestamp_milliseconds, 0, 3) . "\n";
+                $output .= gmdate('H:i:s,', $end_timestamp_seconds) . $end_timestamp_milliseconds . "\n";
             }
 
             $output_ja .= $output . $subtitle->kanji . "\n\n";
