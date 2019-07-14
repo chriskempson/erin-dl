@@ -2,5 +2,5 @@
 # convert-all-subtitles.sh - chriskempson.com
 
 for file in ./media/*/*.xml; do
-    php ./subtitle-converter.php $file
+    php ./subtitle-converter.php $file 6
 done

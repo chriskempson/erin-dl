@@ -3,13 +3,14 @@
 #
 # Creates two SRT files (one Japanese one in language of the supplied file) 
 # from erin.ne.jp's XML subtitle files
-# NOTE: on Ubuntu you may need to install php-xml
+# NOTE: On Ubuntu you may need to install php-xml
 #
-#     php subtitle-converter.php basic-01.en.xml
+#     php subtitle-converter.php basic-01.en.xml 6
 #
 
 $input_file = $argv[1];
-$min_display_seconds = '4';
+$min_display_seconds = $argv[2]; // Delay time to hold subtitles for since
+                                 // no end-time is present in the XML
 
 if (strstr($input_file, '.en.')) $lang = 'eng'; // Why not 'en'?
 if (strstr($input_file, '.es.')) $lang = 'es';
